@@ -1,42 +1,14 @@
-name: DonutSMPSpawner
+name: DonutSpawners
 version: 1.0.0
-main: de.donutsmp.spawner.SpawnerPlugin
-description: A remake of the DonutSMP Spawner Plugin
-authors:
-  - DonutSMP
+main: net.donutsmp.spawners.DonutSpawners
 api-version: 1.21
-
+depend: [Essentials]
 commands:
-  spawner:
-    description: Opens the spawner menu
-    usage: /spawner
-    permission: donutsmp.spawner.use
-  spawnergive:
-    description: Gives a spawner to the player
-    usage: /spawnergive <type> <amount>
-    permission: donutsmp.spawner.give
-
+  givespawner:
+    description: Give a spawner to a player
+    usage: /givespawner <player> <type> [stack]
+    permission: donutspawners.admin
 permissions:
-  donutsmp.spawner.*:
-    description: Gives access to all spawner commands
-    children:
-      donutsmp.spawner.use: true
-      donutsmp.spawner.stack: true
-      donutsmp.spawner.delay: true
-      donutsmp.spawner.hologram: true
-      donutsmp.spawner.give: true
-  donutsmp.spawner.use:
-    description: Allows using the spawner GUI
-    default: true
-  donutsmp.spawner.stack:
-    description: Allows stacking spawners
+  donutspawners.admin:
     default: op
-  donutsmp.spawner.delay:
-    description: Allows changing spawner delay
-    default: op
-  donutsmp.spawner.hologram:
-    description: Allows viewing holograms
-    default: true
-  donutsmp.spawner.give:
-    description: Allows giving spawners to players
-    default: op
+    description: Admin permission for DonutSpawners

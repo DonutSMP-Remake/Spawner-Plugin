@@ -1,22 +1,59 @@
-# DonutSMP Spawner Plugin Configuration
+# DonutSpawners Configuration
 
-# Enable or disable spawner stacking
-stacking-enabled: true
+# Production multipliers per spawner type (per 20 ticks)
+multipliers:
+  COW: 1.0
+  SPIDER: 1.0
+  ZOMBIFIED_PIGLIN: 1.0
+  SKELETON: 1.0
+  BLAZE: 1.0
+  CREEPER: 1.0
+  IRON_GOLEM: 1.0
 
-# Maximum number of spawners that can be stacked
-max-stack-size: 64
+# Bonus multiplier when isolated (>5 blocks from other spawners)
+isolated_bonus: 0.5
 
-# Delay increment in milliseconds when using the delay buttons
-delay-increment: 100
+# General Settings
+settings:
+  require_silk_touch: true
+  natural_spawners_virtual: false
+  auto_save_interval: 6000 # How often to save (in ticks, 6000 = 5 min)
+  production_interval: 600 # How often spawners produce (in ticks, 600 = 30 sec)
+  isolation_radius: 5 # Radius for the isolation bonus
 
-# Minimum delay in milliseconds
-min-delay: 0
+# Messages
+messages:
+  no_permission: "&cYou don't have permission to do that."
+  not_owner: "&cYou are not the owner of this spawner."
+  spawner_given: "&aSpawner given to %player%."
+  invalid_type: "&cInvalid spawner type."
+  merged: "&aSpawners merged."
+  collected: "&aCollected %amount% items and %xp% XP."
+  sold: "&aSold items for %money%."
+  cannot_mine_without_silk: "&cYou need a tool with Silk Touch to mine this spawner."
+  spawner_broken: "&aSpawner broken."
+  spawner_stacked: "&aYou stacked a spawner, now at %amount%x"
+  spawner_stacked_multi: "&aYou stacked %count%x spawner, now at %amount%x"
+  gui_title: "&8%stack% %type% Spawner"
+  gui_title_storage: "&8%stack% %type% (%page%/%pages%)"
+  # GUI Items
+  gui_click_to_sell: "&7• &eClick to sell items and XP"
+  gui_open_storage: "&bOpen Storage"
+  gui_collect_xp: "&bCollect XP"
+  gui_close: "&cClose"
+  gui_previous_page: "&ePrevious Page"
+  gui_sell_items: "&aSell Items"
+  gui_drop_all: "&bDrop All"
+  gui_sell_xp: "&6Sell XP"
+  gui_next_page: "&eNext Page"
 
-# Maximum delay in milliseconds
-max-delay: 20000
+# Economy Prices (per item)
+prices:
+  ROTTEN_FLESH: 0.5
+  BONE: 1.0
+  IRON_INGOT: 5.0
+  GUNPOWDER: 2.0
 
-# Allow breaking existing world spawners
-allow-break-existing-spawners: true
-
-# Require Silk Touch to mine spawners
-require-silk-touch: false
+# XP Settings
+xp:
+  amount_per_cycle: 5

@@ -1,46 +1,69 @@
-# DonutSMP Spawner Plugin
+# DonutSpawners
 
-A reamke of the DonutSMP Spawner Plugin
+A remake of the Famous DonutSMP one
 
-## Status: Work in Progress - Many Dupes and errors
-
-This plugin is not yet complete. It has basic functionality but requires further development.
+![Preview 1](https://i.imgur.com/76lRDdK.png)
+![Preview 2](https://i.imgur.com/l4mN7g2.png)
 
 ## Features
 
-- Spawner stacking (configurable max stack size)
-- Virtual spawning system
-- GUI for managing spawners
-- XP collection from spawners
-
-## Known Issues
-
-- Holograms are disabled
-- Selling UI is empty to prevent exploits
-- Some features may not work as expected
-- Infinite XP exploit Very Very common
-
+*   **Virtual Storage**: Items and XP are stored inside the spawner instead of being dropped on the ground (Anti-Lag).
+*   **Spawner Stacking**: Stack spawners to increase production rates in a single block.
+*   **Economy Integration**: Sell items directly from the GUI (requires Essentials).
+*   **Isolation Bonus**: Spawners produce faster if they are not placed directly next to others.
+*   **Natural Spawners**: Configurable whether naturally generated spawners (dungeons) become virtual or remain vanilla.
+*   **Fully Configurable**: All messages, GUI titles, prices, and intervals can be changed in `config.yml`.
 
 ## Installation
 
-1. Copy `target/spawner-plugin-1.0.0.jar` to your server's plugins folder
-2. Restart the server
+1.  Stop your server.
+2.  Upload the `.jar` file from the `target` folder to the `plugins` folder.
+3.  Ensure **EssentialX** is installed (required for the economy system). -> https://essentialsx.net/
+4.  Start the server.
+5.  Edit `config.yml` in the `plugins/DonutSpawners/` folder to adjust prices and messages.
 
-## Configuration
+## Commands & Permissions
 
-Edit `config.yml` in the plugin's data folder to customize settings.
+### Commands
+*   `/givespawner <Player> <Type> [Amount]`
+    *   Gives a player a ready-to-use spawner.
+    *   Example: `/givespawner Jannes IRON_GOLEM 1`
 
-## Commands
+### Permissions
+*   `donutspawners.admin`
+    *   Allows using `/givespawner`.
+    *   Default: OP only.
 
-- `/spawner` - Main spawner command
-- `/spawnergive` - Give spawner command
+## Configuration (config.yml)
 
-## TODO
+Here are the most important settings explained:
 
-- Fix infinite XP exploits
-- Implement proper selling system
-- Add holograms back
-- Improve UI
-- Add more mob types
-- Optimize performance
-- Fix Spawing
+*   **settings**:
+    *   `require_silk_touch`: `true` = You need Silk Touch to mine spawners.
+    *   `natural_spawners_virtual`: `true` = Natural spawners become custom spawners when clicked.
+    *   `production_interval`: How often (in ticks) items are generated (20 ticks = 1 second).
+*   **messages**: You can translate all texts here, including GUI names.
+*   **prices**: Set how much money you get per item when selling.
+*   **xp**: Set how much XP is generated per cycle.
+
+## Usage in Game
+
+### Placing & Stacking
+*   **Place**: Place a spawner to start production.
+*   **Stacking**: Right-click an existing spawner with the same type of spawner in hand to stack them.
+    *   **Shift + Right-click**: Adds the entire stack from your hand to the spawner.
+    *   **Note**: You will see an action bar message confirming the stack count.
+
+### GUI & Storage
+*   **Open (Right-click)**: Opens the main menu (if not holding a spawner to stack).
+    *   **Click Head**: Sells everything and collects XP.
+    *   **Chest**: Opens the detailed storage (view drops).
+    *   **XP Bottle**: Collects only XP.
+
+### Breaking
+*   **Break**: Mine the spawner (Default: requires Silk Touch).
+    *   **Normal Break**: Reduces the stack by 1 and drops 1 spawner item.
+    *   **Shift + Break**: Breaks up to 64 spawners from the stack at once.
+    *   **Warning**: All stored items/XP inside the spawner are lost when broken!
+
+MIT License
