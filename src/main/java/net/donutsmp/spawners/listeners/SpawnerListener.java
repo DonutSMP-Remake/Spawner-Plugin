@@ -237,15 +237,41 @@ public class SpawnerListener implements Listener {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.sold", "&aSold items for %money%.").replace("%money%", String.format("%.2f", sold))));
                     new SpawnerGUI(plugin, data, true, currentPage).open(player);
                 } else if (slot == 49) {
+                    int startIndex = (currentPage - 1) * 45;
+                    int currentIndex = 0;
+                    int itemsDroppedOnPage = 0;
+                    HashMap<Material, Long> toRemove = new HashMap<>();
+
                     for (Map.Entry<Material, Long> entry : data.getAccumulatedDrops().entrySet()) {
+                        Material mat = entry.getKey();
+                        long totalAmount = entry.getValue();
+                        long remaining = totalAmount;
+
+                        while (remaining > 0) {
+                            if (itemsDroppedOnPage >= 45) break;
+
+                            if (currentIndex >= startIndex) {
+                                int stackSize = (int) Math.min(remaining, 64);
+                                player.getWorld().dropItem(player.getLocation(), new ItemStack(mat, stackSize));
+                                toRemove.put(mat, toRemove.getOrDefault(mat, 0L) + stackSize);
+                                itemsDroppedOnPage++;
+                            }
+                            remaining -= 64;
+                            currentIndex++;
+                        }
+                        if (itemsDroppedOnPage >= 45) break;
+                    }
+
+                    for (Map.Entry<Material, Long> entry : toRemove.entrySet()) {
+                        Material mat = entry.getKey();
                         long amount = entry.getValue();
-                        while (amount > 0) {
-                            int dropSize = (int) Math.min(amount, 64);
-                            player.getWorld().dropItem(player.getLocation(), new ItemStack(entry.getKey(), dropSize));
-                            amount -= dropSize;
+                        long current = data.getAccumulatedDrops().getOrDefault(mat, 0L);
+                        if (current <= amount) {
+                            data.getAccumulatedDrops().remove(mat);
+                        } else {
+                            data.getAccumulatedDrops().put(mat, current - amount);
                         }
                     }
-                    data.getAccumulatedDrops().clear();
                     new SpawnerGUI(plugin, data, true, currentPage).open(player);
                 } else if (slot == 50) {
                     if (data.getAccumulatedXP() > 0) {
